@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const User = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
     Id: ID,
     First_name: String,
@@ -12,12 +12,28 @@ const User = new mongoose.Schema(
     Resume: String,
     profile_path: String,
     Contact_Information: String,
+    Email: String,
     Intro: String,
   },
   { timestamps: true }
 );
 
-const Resumes = new mongoose.Schema(
+const interviewerSchema = new mongoose.Schema(
+  {
+    Id: ID,
+    First_name: String,
+    Middel_name: String,
+    Last_name: String,
+    Gender: Int,
+    Job_Post_Id: ID,
+    Company: String,
+    profile_path: String,
+    Contact_Information: String,
+    Email: String,
+  },
+  { timestamps: true }
+);
+const ResumesSchema = new mongoose.Schema(
   {
     Submited_on: Date,
     Link: String,
@@ -30,7 +46,7 @@ const Resumes = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Resumes_ATS = new mongoose.Schema(
+const Resumes_ATS_Schema = new mongoose.Schema(
   {
     Id: ID,
     Resumes_ID: ID,
@@ -69,7 +85,7 @@ const Resumes_ATS = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Job_Tracker = new mongoose.Schema(
+const Job_TrackerSchema = new mongoose.Schema(
   {
     Id: ID,
     User_Id: ID,
@@ -79,3 +95,11 @@ const Job_Tracker = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+const User = mongoose.model("User", UserSchema);
+const Resumes = mongoose.model("Resumes", ResumesSchema);
+const Job_Tracker = mongoose.model("Job", Job_TrackerSchema);
+const Resumes_ATS = mongoose.model("Resumes_ATS", Resumes_ATS_Schema);
+const interviewer = mongoose.model("interviewer", interviewerSchema);
+
+export { User, Resumes, Job_Tracker, Resumes_ATS, interviewer };
